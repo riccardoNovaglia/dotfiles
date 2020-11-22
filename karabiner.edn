@@ -1,0 +1,102 @@
+  ;;
+{;
+ :alone 50
+ :delay 200
+ :held 500
+ :sim 200
+ :simlayer-threshold 222
+ :applications {;
+                :brave ["com.brave.Browser"]
+                :code ["com.microsoft.VSCode"]
+                :intellij ["com.jetbrains.intellij"]
+                :slack ["com.tinyspeck.slackmacgap"]
+                :spotify ["com.spotify.client"]
+                :zoom ["us.zoom.xos"]
+                ;
+                }
+ :templates    {;
+                :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
+                :launch "osascript -e 'tell application \"%s\" to activate'"
+                :open-website "open %s"
+                :open-brave "osascript -e '
+                        set address to \"%s\"
+                        tell application \"Brave\"
+                           activate
+                                if not (exists window 1) then reopen
+                                open location \"http://\" & address
+                        end tell'"
+                :test "say 'test'"
+                ;
+                }
+ :simlayers    {;
+                :launch-mode {:key :right_shift}
+                :open-projects-mode {:key :semicolon}
+                :open-website-mode {:key :b}
+                :navigate-mode {:key :slash}
+                ;
+                }
+ :main [;
+        {:des "caps_lock to escape" :rules [[:##caps_lock :left_control nil {:alone :escape}]]}
+        {:des "mission control" :rules [[:right_option [:mission_control]]]}
+        {:des "easy delete" :rules [[:!Sdelete_or_backspace [:!Fdelete_or_backspace]]]}
+        {:des "launch apps" :rules [:launch-mode
+                                    [:b [:launch "Brave"]]
+                                    [:c [:launch "Visual Studio Code"]]
+                                    [:i [:launch "idea"]]
+                                    [:t [:launch "iTerm"]]
+                                    [:s [:launch "Slack"]]
+                                    [:z [:launch "zoom.us"]]
+                                    ;
+                                    ]}
+        {:des "open files"  :rules [:open-projects-mode
+                                    [:k [:code-project "~/repos/dotfiles" "~/.config/karabiner.edn"]]
+                                    [:s [:code-project "~/repos/stub4"]]
+                                    [:z [:code-project "~/.zshrc"]]
+                                    ;
+                                    ]}
+        {:des "zoom global mute"  :rules [[:!Ta [:!CSa]]]}
+        {:des "zoom"        :rules [:zoom
+                                    [:a [:!CSa]] ; toggle mute
+                                    [:v [:!CSv]] ; toggle video
+                                    [:g [:!CSw]] ; toggle gallery mode
+                                    [:s [:!CSs]] ; start/stop share
+                                    [:w [:!Cw]]  ; leave call
+                                    ;
+                                    ]}
+        {:des "code"        :rules [:code
+                                    [:t [:!Of12] :navigate-mode] ; terminal
+                                    [:e [:!COe] :navigate-mode]  ; editor
+                                    [:g [:!COg] :navigate-mode]  ; git
+                                    [:f [:!C1] :navigate-mode]   ; files
+                                    [:b [:!COb] :navigate-mode]  ; sidebar
+                                    ;
+                                    ]}
+        {:des "brave"       :rules [:open-website-mode
+                                    [:d [:open-brave "duckduckgo.com"]]
+                                    [:g [:open-brave "mail.google.com"]]
+                                    [:k [:open-brave "github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md"]]
+                                    [:m [:open-brave "music.youtube.com"]]
+                                    [:s [:open-brave "google.com"]]
+                                    [:t [:open-brave "twitter.com"]]
+                                    [:y [:open-brave "mail.yahoo.com"]]
+                                    ;
+                                    ]}
+        ;
+        ]
+ ;
+ }
+
+
+;; !  | means mandatory
+;; #  | means optional
+;; C  | left_command
+;; T  | left_control
+;; O  | left_option
+;; S  | left_shift
+;; F  | fn
+;; Q  | right_command
+;; W  | right_control
+;; E  | right_option
+;; R  | right_shift
+;; !! | mandatory command + control + optional + shift (hyper)
+;; ## | optional any
