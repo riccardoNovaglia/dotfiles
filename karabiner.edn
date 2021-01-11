@@ -4,96 +4,117 @@
  :held 500
  :sim 200
  :simlayer-threshold 222
- :applications {;
-                :brave ["com.brave.Browser"]
-                :code ["com.microsoft.VSCode"]
-                :intellij ["com.jetbrains.intellij"]
-                :slack ["com.tinyspeck.slackmacgap"]
-                :spotify ["com.spotify.client"]
-                :zoom ["us.zoom.xos"]
-                ;
-                }
- :templates    {;
-                :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
-                :launch "osascript -e 'tell application \"%s\" to activate'"
-                :open-website "open %s"
-                :open-brave "osascript -e '
+
+ :devices       {:apple-keyboard [{:product_id 592 :vendor_id 1452}] :keychron [{:product_id 597 :vendor_id 1452}]}
+
+ :templates     {:code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
+                 :launch "osascript -e 'tell application \"%s\" to activate'"
+                 :open-brave "osascript -e '
                         set address to \"%s\"
                         tell application \"Brave\"
                            activate
                                 if not (exists window 1) then reopen
-                                open location \"http://\" & address
-                        end tell'"
-                :test "say 'test'"
-                ;
-                }
- :simlayers    {;
-                :launch-mode {:key :right_shift}
-                :open-projects-mode {:key :semicolon}
-                :open-website-mode {:key :b}
-                :navigate-mode {:key :slash}
-                ;
-                }
- :devices {;
-           :apple-keyboard [{:product_id 592 :vendor_id 1452}]
-            ;
-           }
+                                open location \"https://\" & address
+                        end tell'"}
+
+ :applications {:brave               ["com.brave.Browser"]
+                :slack               ["com.tinyspeck.slackmacgap"]
+                :spotify             ["com.spotify.client"]
+                :zoom                ["us.zoom.xos"]
+                :code                ["com.microsoft.VSCode"]
+                :intellij            ["com.jetbrains.intellij"]
+                :dev-apps            ["com.microsoft.VSCode" "com.jetbrains.intellij"]}
+
+ :simlayers    {:launch-mode         {:key :right_shift}
+                :open-projects-mode  {:key :semicolon}
+                :open-website-mode   {:key :b}
+                :navigate-mode       {:key :slash}
+                :spacebar-mode       {:key :spacebar}}
+
+ :tos          {:delete              {:key :delete_or_backspace}
+                :return              {:key :return_or_enter}
+                :tilde               {:key :grave_accent_and_tilde}
+                :open_brace          {:key :open_bracket :modi :shift}
+                :close_brace         {:key :close_bracket :modi :shift}
+                :open_paren          {:key :9 :modi :shift}
+                :close_paren         {:key :0 :modi :shift}
+                :less_than           {:key :comma :modi :shift}
+                :greater_than        {:key :period :modi :shift}}
+
  :main [;
+        {:des "run goku"            :rules [[:!CTOg ["/usr/local/bin/goku"]]]}
         {:des "caps_lock to escape" :rules [[:##caps_lock :left_control nil {:alone :escape}]]}
-        {:des "mission control" :rules [[:right_option [:mission_control]]]}
-        {:des "easy delete" :rules [[:!Sdelete_or_backspace [:!Fdelete_or_backspace]]]}
-        {:des "launch apps" :rules [:launch-mode
-                                    [:b [:launch "Brave"]]
-                                    [:c [:launch "Visual Studio Code"]]
-                                    [:i [:launch "idea"]]
-                                    [:t [:launch "iTerm"]]
-                                    [:s [:launch "Slack"]]
-                                    [:z [:launch "zoom.us"]]
-                                    ;
-                                    ]}
-        {:des "open files"  :rules [:open-projects-mode
-                                    [:k [:code-project "~/repos/dotfiles" "~/.config/karabiner.edn"]]
-                                    [:s [:code-project "~/repos/stub4"]]
-                                    [:z [:code-project "~/.zshrc"]]
-                                    ;
-                                    ]}
-        {:des "zoom global mute"  :rules [[:!Ta [:!CSa]]]}
-        {:des "zoom"        :rules [:zoom
-                                    [:a [:!CSa]] ; toggle mute
-                                    [:v [:!CSv]] ; toggle video
-                                    [:g [:!CSw]] ; toggle gallery mode
-                                    [:s [:!CSs]] ; start/stop share
-                                    [:w [:!Cw]]  ; leave call
-                                    ;
-                                    ]}
-        {:des "code"        :rules [:code
-                                    [:t [:!Of12] :navigate-mode] ; terminal
-                                    [:e [:!COe] :navigate-mode]  ; editor
-                                    [:g [:!COg] :navigate-mode]  ; git
-                                    [:f [:!C1] :navigate-mode]   ; files
-                                    [:b [:!COb] :navigate-mode]  ; sidebar
-                                    ;
-                                    ]}
-        {:des "brave"       :rules [:open-website-mode
-                                    [:d [:open-brave "duckduckgo.com"]]
-                                    [:g [:open-brave "mail.google.com"]]
-                                    [:k [:open-brave "github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md"]]
-                                    [:m [:open-brave "music.youtube.com"]]
-                                    [:s [:open-brave "google.com"]]
-                                    [:t [:open-brave "twitter.com"]]
-                                    [:y [:open-brave "mail.yahoo.com"]]
-                                    ;
-                                    ]}
-        {:des "backtick weirdness"  :rules [:apple-keyboard
-                                            [:#Snon_us_backslash :#Sgrave_accent_and_tilde]
-                                            [:#Sgrave_accent_and_tilde :#Snon_us_backslash]
-                                            ;
-                                            ]}
+        {:des "fn to control"       :rules [[:fn [:right_control]]]}
+        {:des "control to fn"       :rules [[:right_control [:fn]]]}
+        {:des "easy delete"         :rules [[:!Tdelete_or_backspace [:!Fdelete_or_backspace]]]}
+        {:des "backtick weirdness"  :rules [:apple-keyboard [:#Snon_us_backslash :#Sgrave_accent_and_tilde] [:#Sgrave_accent_and_tilde :#Snon_us_backslash]]}
+        {:des "launch apps"
+         :rules [:launch-mode
+                 [:b [:launch "Brave"]]
+                 [:c [:launch "Visual Studio Code"]]
+                 [:i [:launch "idea"]]
+                 [:t [:launch "iTerm"]]
+                 [:s [:launch "Slack"]]
+                 [:z [:launch "zoom.us"]]
+                 ;
+                 ]}
+        {:des "zoom global mute"  :rules [[:!Spage_down [:!CSa]]]}
+        {:des "zoom"
+         :rules [:zoom
+                 [:page_down      [:!CSa]] ; toggle mute
+                 [:page_up        [:!CSv]] ; toggle video
+                 [:end            [:!CSw]] ; toggle gallery mode
+                 [:home           [:!CSs]] ; start/stop share
+                 [:delete_forward [:!Cw]]  ; leave call
+                 ]}
+        {:des "code"
+         :rules [:code
+                 [:t [:!Of12] :navigate-mode] ; terminal
+                 [:e [:!COe] :navigate-mode]  ; editor
+                 [:g [:!COg] :navigate-mode]  ; git
+                 [:f [:!C1] :navigate-mode]   ; files
+                 [:b [:!COb] :navigate-mode]  ; sidebar
+                 [:!Cslash [:!Cslash :down_arrow]]  ; comment and move to next line
+                 [:!Qslash [:!Qslash :down_arrow]]  ; (for both side commands)
+                 ]}
+        {:des "spacebar dev"
+         :rules [:spacebar-mode
+                 [:a [:!S9 :!S0 :spacebar :equal_sign :greater_than :spacebar :open_brace :close_brace :left_arrow] :dev-apps]; () => {}
+                 [:f [:f :u :n :c :t :i :o :n :spacebar] :dev-apps]; function
+                 [:p [:open_paren :close_paren] :dev-apps]; ()  
+                 [:b [:open_brace :close_brace] :dev-apps]; {}  
+                 [:left_arrow [:left_arrow :left_arrow :left_arrow :left_arrow :left_arrow :left_arrow] :dev-apps]; navigate from braces to paren in arrow
+                 [:right_arrow [:right_arrow :right_arrow :right_arrow :right_arrow :right_arrow :right_arrow] :dev-apps]; navigate from parens to braces in arrow
+                 [:c [:c :o :n :s :o :l :e :period :l :o :g :open_paren :close_paren :left_arrow]]; console.log()
+                 [:e [:equal_sign :open_brace :close_brace :left_arrow] :dev-apps]; ={}
+                 [:quote [:equal_sign :!Squote :!Squote :left_arrow] :dev-apps]; =""
+                 ]}
+        {:des "navigate"
+         :rules [[:!Rw [:up_arrow]]
+                 [:!Ra [:left_arrow]]
+                 [:!Rd [:right_arrow]]
+                 [:!Rs [:down_arrow]]]}
+        ;; 
+        ;;
+        ;; profile specific 
+        ;; 
+        ;; 
+        {:des "code projects"
+         :rules [:open-projects-mode
+                 [:k [:code-project "~/repos/dotfiles"]]
+                 [:s [:code-project "~/repos/stub4"]]
+                 [:z [:code-project "~/.zshrc"]]]}
+        {:des "open websites"
+         :rules [:open-website-mode
+                 [:d [:open-brave "duckduckgo.com"]]
+                 [:g [:open-brave "mail.google.com"]]
+                 [:m [:open-brave "music.youtube.com"]]
+                 [:t [:open-brave "twitter.com"]]
+                 [:y [:open-brave "mail.yahoo.com"]]]}
         ;
         ]
  ;
  }
-
 
 ;; !  | means mandatory
 ;; #  | means optional
@@ -108,3 +129,5 @@
 ;; R  | right_shift
 ;; !! | mandatory command + control + optional + shift (hyper)
 ;; ## | optional any
+
+;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md
