@@ -42,7 +42,6 @@
                 :greater_than        {:key :period :modi :shift}}
 
  :main [;
-        {:des "run goku"            :rules [[:!CTOg ["/usr/local/bin/goku"]]]}
         {:des "caps_lock to escape" :rules [[:##caps_lock :left_control nil {:alone :escape}]]}
         {:des "fn to control"       :rules [[:fn [:right_control]]]}
         {:des "control to fn"       :rules [[:right_control [:fn]]]}
@@ -85,7 +84,7 @@
                  [:b [:open_brace :close_brace] :dev-apps]; {}  
                  [:left_arrow [:left_arrow :left_arrow :left_arrow :left_arrow :left_arrow :left_arrow] :dev-apps]; navigate from braces to paren in arrow
                  [:right_arrow [:right_arrow :right_arrow :right_arrow :right_arrow :right_arrow :right_arrow] :dev-apps]; navigate from parens to braces in arrow
-                 [:c [:c :o :n :s :o :l :e :period :l :o :g :open_paren :close_paren :left_arrow]]; console.log()
+                 [:c [:c :o :n :s :o :l :e :period :l :o :g :open_paren :close_paren :left_arrow] :dev-apps]; console.log()
                  [:e [:equal_sign :open_brace :close_brace :left_arrow] :dev-apps]; ={}
                  [:quote [:equal_sign :!Squote :!Squote :left_arrow] :dev-apps]; =""
                  ]}
@@ -106,7 +105,7 @@
                  [:z [:code-project "~/.zshrc"]]]}
         {:des "open websites"
          :rules [:open-website-mode
-                 [:d [:open-brave "duckduckgo.com"]]
+                 [:d [:open-brave "www.duolingo.com/learn"]]
                  [:g [:open-brave "mail.google.com"]]
                  [:m [:open-brave "music.youtube.com"]]
                  [:t [:open-brave "twitter.com"]]
