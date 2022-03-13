@@ -1,25 +1,25 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/novar/.oh-my-zsh"
+ZSH_CUSTOM=${HOME}/repos/dotfiles/zsh_custom
+# (To add plugins: git clone https://github.com/xxx $ZSH_CUSTOM/plugins/xxx)
 
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# Built-in
+plugins=(autojump git)
+
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+plugins+=(zsh-syntax-highlighting)
+
+# git clone https://github.com/ptavares/zsh-direnv $ZSH_CUSTOM/plugins/zsh-direnv
+plugins+=(zsh-direnv)
+
+# git clone https://github.com/lukechilds/zsh-nvm $ZSH_CUSTOM/plugins/zsh-nvm
+export NVM_AUTO_USE=true
+export NVM_LAZY_LOAD=false
+export NVM_COMPLETION=true
+plugins+=(zsh-nvm)
+
+ZSH_DISABLE_COMPFIX=true # If using brew across multiple accounts
+export ZSH="${HOME}/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=~/repos/dotfiles/zsh_custom
-
-plugins=(git zsh-syntax-highlighting autojump)
-
-ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
