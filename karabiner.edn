@@ -5,22 +5,17 @@
  :sim 200
  :simlayer-threshold 222
 
- :devices       {:apple-keyboard [{:product_id 592 :vendor_id 1452}] :keychron [{:product_id 597 :vendor_id 1452}]}
+ :devices       {:keychron [{:product_id 591 :vendor_id 1452}]}
 
  :templates     {:code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
                  :launch "osascript -e 'tell application \"%s\" to activate'"
-                 :open-brave "osascript -e '
-                        set address to \"%s\"
-                        tell application \"Brave\"
-                           activate
-                                if not (exists window 1) then reopen
-                                open location \"https://\" & address
-                        end tell'"}
+                 :hello "say hello"}
 
  :applications {:brave               ["com.brave.Browser"]
                 :slack               ["com.tinyspeck.slackmacgap"]
                 :spotify             ["com.spotify.client"]
                 :zoom                ["us.zoom.xos"]
+                :vlc                 ["org.videolan.vlc"]
                 :code                ["com.microsoft.VSCode"]
                 :intellij            ["com.jetbrains.intellij"]
                 :dev-apps            ["com.microsoft.VSCode" "com.jetbrains.intellij"]}
@@ -31,8 +26,9 @@
                 :navigate-mode       {:key :slash}
                 :spacebar-mode       {:key :spacebar}}
 
- :tos          {:delete              {:key :delete_or_backspace}
-                :return              {:key :return_or_enter}
+ :tos          {:fn                  {:key :keyboard_fn}
+                :delete              {:key :delete_or_backspace}
+                :enter               {:key :return_or_enter}
                 :tilde               {:key :grave_accent_and_tilde}
                 :open_brace          {:key :open_bracket :modi :shift}
                 :close_brace         {:key :close_bracket :modi :shift}
@@ -42,30 +38,22 @@
                 :greater_than        {:key :period :modi :shift}}
 
  :main [;
-        {:des "caps_lock to escape" :rules [[:##caps_lock :left_control nil {:alone :escape}]]}
-        {:des "fn to control"       :rules [[:fn [:right_control]]]}
-        {:des "control to fn"       :rules [[:right_control [:fn]]]}
-        {:des "easy delete"         :rules [[:!Tdelete_or_backspace [:!Fdelete_or_backspace]]]}
-        {:des "backtick weirdness"  :rules [:apple-keyboard [:#Snon_us_backslash :#Sgrave_accent_and_tilde] [:#Sgrave_accent_and_tilde :#Snon_us_backslash]]}
-        {:des "launch apps"
-         :rules [:launch-mode
-                 [:b [:launch "Brave"]]
-                 [:c [:launch "Visual Studio Code"]]
-                 [:i [:launch "idea"]]
-                 [:t [:launch "iTerm"]]
-                 [:s [:launch "Slack"]]
-                 [:z [:launch "zoom.us"]]
-                 ;
-                 ]}
-        {:des "zoom global mute"  :rules [[:!Spage_down [:!CSa]]]}
+        ;; {:des "test"                :rules [[:9 [:hello]]]]}
+        {:des "caps_lock to escape" :rules [[:caps_lock [:escape]]]}
+        {:des "fn - control switch" :rules [[:fn [:right_control]] [:right_control [:fn]]]}
+        {:des "easy delete"         :rules [[:!Tdelete_or_backspace [:delete_forward]]]}
         {:des "zoom"
          :rules [:zoom
-                 [:page_down      [:!CSa]] ; toggle mute
-                 [:page_up        [:!CSv]] ; toggle video
-                 [:end            [:!CSw]] ; toggle gallery mode
-                 [:home           [:!CSs]] ; start/stop share
-                 [:delete_forward [:!Cw]]  ; leave call
-                 ]}
+                 [:f1                      [:!CSa]] ; toggle mute
+                 [:grave_accent_and_tilde  [:!CSv]] ; toggle video
+                 [:keypad_num_lock         [:!CSw]] ; toggle gallery mode
+
+                 [:delete_forward          [:!Cw :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :fn :enter]]  ; leave call
+
+                 ; avoid having to press fn key on zoom
+                 [:f10                     [:mute]]
+                 [:f11                     [:volume_decrement]]
+                 [:f12                     [:volume_increment]]]}
         {:des "code"
          :rules [:code
                  [:t [:!Of12] :navigate-mode] ; terminal
@@ -75,42 +63,67 @@
                  [:b [:!COb] :navigate-mode]  ; sidebar
                  [:!Cslash [:!Cslash :down_arrow]]  ; comment and move to next line
                  [:!Qslash [:!Qslash :down_arrow]]  ; (for both side commands)
+                 [:!Cm [:escape]]  ; disable minimise window
                  ]}
         {:des "spacebar dev"
          :rules [:spacebar-mode
-                 [:a [:!S9 :!S0 :spacebar :equal_sign :greater_than :spacebar :open_brace :close_brace :left_arrow] :dev-apps]; () => {}
-                 [:f [:f :u :n :c :t :i :o :n :spacebar] :dev-apps]; function
-                 [:p [:open_paren :close_paren] :dev-apps]; ()  
-                 [:b [:open_brace :close_brace] :dev-apps]; {}  
+                ;;  Not sure about these, I hit them by accident too often
+                ;;  [:a [:!S9 :!S0 :spacebar :equal_sign :greater_than :spacebar :open_brace :close_brace :left_arrow] :dev-apps]; () => {}
+                ;;  [:f [:f :u :n :c :t :i :o :n :spacebar] :dev-apps]; function
+                ;;  [:p [:open_paren :close_paren] :dev-apps]; ()  
+                ;;  [:b [:open_brace :close_brace] :dev-apps]; {}  
+                ;;  [:c [:c :o :n :s :o :l :e :period :l :o :g :open_paren :close_paren :left_arrow] :dev-apps]; console.log()
+                ;;  [:e [:equal_sign :open_brace :close_brace :left_arrow] :dev-apps]; ={}
+
                  [:left_arrow [:left_arrow :left_arrow :left_arrow :left_arrow :left_arrow :left_arrow] :dev-apps]; navigate from braces to paren in arrow
                  [:right_arrow [:right_arrow :right_arrow :right_arrow :right_arrow :right_arrow :right_arrow] :dev-apps]; navigate from parens to braces in arrow
-                 [:c [:c :o :n :s :o :l :e :period :l :o :g :open_paren :close_paren :left_arrow] :dev-apps]; console.log()
-                 [:e [:equal_sign :open_brace :close_brace :left_arrow] :dev-apps]; ={}
-                 [:quote [:equal_sign :!Squote :!Squote :left_arrow] :dev-apps]; =""
+                 [:quote [:equal_sign :!Squote :!Squote :left_arrow] :dev-apps]]}; =""
+        {:des "hyper navigate"
+         :rules [[:!CTOj [:left_arrow]]
+                 [:!CTOk [:down_arrow]]
+                 [:!CTOl [:right_arrow]]
+                 [:!CTOi [:up_arrow]]
+                 [:!SCTOj [:!Sleft_arrow]]
+                 [:!SCTOk [:!Sdown_arrow]]
+                 [:!SCTOl [:!Sright_arrow]]
+                 [:!SCTOi [:!Sup_arrow]]]}
+        {:des "spotify"
+         :rules [:spotify
+                 [:f7 [:rewind]]
+                 [:f8 [:play_or_pause]]
+                 [:f9 [:fastforward]]
+                 [:f10 [:mute]]
+                 [:f11 [:volume_decrement]]
+                 [:f12 [:volume_increment]]
+                 [:!Cf [:!Cl]]
                  ]}
-        {:des "navigate"
-         :rules [[:!Rw [:up_arrow]]
-                 [:!Ra [:left_arrow]]
-                 [:!Rd [:right_arrow]]
-                 [:!Rs [:down_arrow]]]}
-        ;; 
-        ;;
-        ;; profile specific 
-        ;; 
-        ;; 
-        {:des "code projects"
-         :rules [:open-projects-mode
-                 [:k [:code-project "~/repos/dotfiles"]]
-                 [:s [:code-project "~/repos/stub4"]]
-                 [:z [:code-project "~/.zshrc"]]]}
-        {:des "open websites"
-         :rules [:open-website-mode
-                 [:d [:open-brave "www.duolingo.com/learn"]]
-                 [:g [:open-brave "mail.google.com"]]
-                 [:m [:open-brave "music.youtube.com"]]
-                 [:t [:open-brave "twitter.com"]]
-                 [:y [:open-brave "mail.yahoo.com"]]]}
-        ;
+        {:des "pause over f8 by deault"
+         :rules [;
+                 ;; f8 -> play/pause
+                 [:f8 [:play_or_pause]]
+                 ;; shift+f8 to f8
+                 [:!Sf8 [:f8]]]}
+        {:des "pythony tings"
+         :rules [;
+                 ;;Underscore mode
+                 ;; go into underscore mode if it isn't already
+                 [:!CTOhyphen ["underscore-mode" 1] ["underscore-mode" 0]]
+                 ;; exit from underscore mode if it is already
+                 [:!CTOhyphen ["underscore-mode" 0] ["underscore-mode" 1]]
+                 ;; spacebars -> underscores
+                 [:spacebar :!Shyphen ["underscore-mode" 1]]
+                 ;; shift+spacebars -> underscores
+                 [:!Sspacebar :!Shyphen ["underscore-mode" 1]]
+                 ;; ctl+spacebars -> spacebar - in case you wanna add a space without dropping out
+                 [:!Tspacebar :spacebar ["underscore-mode" 1]]
+                 ;; ctrl+i -> __init__.py
+                 [:!Ti [:!Shyphen :!Shyphen :i :n :i :t :!Shyphen :!Shyphen :period :p :y] ["underscore-mode" 1]]
+                 ;;
+                 ;; ctrl+cmd+i -> __init__.py
+                 [:!CTi [:!Shyphen :!Shyphen :i :n :i :t :!Shyphen :!Shyphen :period :p :y]]
+                 ;; ctrl+s -> self
+                 [:!Ts [:s :e :l :f :period] [:dev-apps]]]}
+                 ;;
         ]
  ;
  }
