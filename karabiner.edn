@@ -124,6 +124,7 @@
                  ;; ctrl+s -> self
                  [:!Ts [:s :e :l :f :period] [:dev-apps]]]}
                  ;;
+         {:des "open files" :rules [ :open-projects-mode [:k [:code-project "~/repos/dotfiles"]] ] }
         ]
  ;
  }
