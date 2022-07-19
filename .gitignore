@@ -2,3 +2,5 @@ other.karabiner.edn
 .clj-kondo
 .lsp
 plugins
+octo.aliases.zsh
+Brewfile.lock.json
