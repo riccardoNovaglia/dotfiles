@@ -1,4 +1,7 @@
-alias wait_and_open='f() {wait-port --output silent $1; open http://localhost:$1};f'
+wait_and_open() {
+    wait-port --output silent $1; 
+    osascript ~/projects/me/dotfiles/open_or_refresh.applescript "http://localhost:$1";
+}
 
 alias gprune='git prune; git remote prune origin; git branch --merged master | grep -v "^[ *]*master$" | xargs git branch -d'
 alias gprune_main='git prune; git remote prune origin; git branch --merged main | grep -v "^[ *]*main$" | xargs git branch -d'
