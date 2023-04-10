@@ -6,16 +6,24 @@ wait_and_open() {
 alias gprune='git prune; git remote prune origin; git branch --merged master | grep -v "^[ *]*master$" | xargs git branch -d'
 alias gprune_main='git prune; git remote prune origin; git branch --merged main | grep -v "^[ *]*main$" | xargs git branch -d'
 alias gprune_orphans="git branch -vv | grep ': gone]'|  grep -v '\*' | awk '{ print $1; }' | xargs -r git branch -D"
+
 alias gupstash='git stash; gup; git stash pop'
 alias gmup='git checkout master; gup;'
-alias gbranch='gmup; gcb $1'
 alias reb='gmup; git checkout -; git rebase master;'
+
+alias gbranch='gmup; gcb $1'
+
 alias recent='git recent;' # git config --global alias.recent 'branch --sort=-committerdate --format="%(committerdate:relative)%09%(refname:short)"'
 alias recent-nodate='git recent-nodate;' # git config --global alias.recent-nodate 'branch --sort=-committerdate --format="%(refname:short)"'
 alias wip='recent;'
 alias gp='git push --force-with-lease'
+
 alias gpullforce='git fetch; git reset --hard origin/$(git branch --show-current)'
+alias gpf='gpullforce'
+
 alias continue='git add .; GIT_EDITOR=true git rebase --continue' # Continue, override editor with just true so that it immediately returns.
+
+alias absorb='git add .; GIT_EDITOR=true git absorb --and-rebase'
 
 fzf-git-branch() {
     git rev-parse HEAD > /dev/null 2>&1 || return
@@ -45,6 +53,7 @@ fzf-git-checkout() {
 }
 alias gcof='fzf-git-checkout'
 alias gf='gcof'
+alias gg='gf'
 
 alias run="yarn run"
 alias r="run"
