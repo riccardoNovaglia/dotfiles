@@ -4,3 +4,5 @@ other.karabiner.edn
 plugins
 octo.aliases.zsh
 Brewfile.lock.json
+.zshrc_link
+.DS_Store
