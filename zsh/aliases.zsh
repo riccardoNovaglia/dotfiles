@@ -69,4 +69,4 @@ alias zup="source ~/.zshrc"
 alias aliases="less ~/projects/me/dotfiles/aliases.zsh"
 alias aliases_up="vi ~/projects/me/dotfiles/aliases.zsh"
 
-source ~/projects/me/dotfiles/octo.aliases.zsh
+source ~/projects/me/dotfiles/zsh/octo.aliases.zsh
