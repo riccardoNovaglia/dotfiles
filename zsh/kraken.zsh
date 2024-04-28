@@ -1,0 +1,8 @@
+# Disable DD locally
+export DD_TRACE_ENABLED=0
+export DD_PROFILING_ENABLED=0
+export DD_RUNTIME_METRICS_ENABLED=0
+export DD_IAST_ENABLED=0
+export DD_TRACE_OTEL_ENABLED=0
+
+export KRAKEN_CLIENT='oegb';
