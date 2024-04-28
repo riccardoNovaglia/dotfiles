@@ -3,13 +3,7 @@
 
 export ZSH="$HOME/.oh-my-zsh"
 
-# Enable Powerlevel10k instant prompt.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Set Powerlevel10k as theme.
-ZSH_THEME="powerlevel10k/powerlevel10k"
+source ~/projects/me/dotfiles/zsh/p10k.zsh
 
 # Doesn't seem to make much difference, disabled for now. Should speed up zsh startup?
 # source ~/projects/me/dotfiles/zsh/compinit.zsh
@@ -35,8 +29,8 @@ source ~/projects/me/dotfiles/zsh/invoke.zsh
 source ~/projects/me/dotfiles/zsh/aliases.zsh
 source ~/projects/me/dotfiles/zsh/git_aliases.zsh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Imported from p10k.zsh.
+source_p10k
 
 # Setup Kraken env variables.
 source ~/projects/me/dotfiles/zsh/kraken.zsh
