@@ -28,7 +28,8 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     # os_icon               # os identifier
-    dir                     # current directory
+    # newline                 # \n
+    # dir                     # current directory
     # vcs                     # git status
     newline                 # \n
     prompt_char             # prompt symbol
@@ -39,21 +40,21 @@
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     status                  # exit code of the last command
-    # dir                     # current directory
     vcs                     # git status
-    command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
-    # direnv                  # direnv status (https://direnv.net/)
-    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    # anaconda                # conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
+    fnm                     # custom FNM prompt below at prompt_fnm
+    command_execution_time  # duration of the last command
+    # direnv                  # direnv status (https://direnv.net/)
+    # virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
+    # anaconda                # conda environment (https://conda.io/)
     # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     # node_version          # node.js version
-    fnm                     # custom FNM prompt below at prompt_fnm
     # rust_version          # rustc version (https://www.rust-lang.org)
-    # =========================[ Line #2 ]=========================
-    # newline
     # example               # example user-defined segment (see prompt_example function below)
+    newline                 # \n
+    # =========================[ Line #2 ]=========================
+    dir                     # current directory
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
@@ -84,7 +85,8 @@
   # Red prompt symbol if the last command failed.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=196
   # Default prompt symbol.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='❯'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION='❯'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=''
   # Prompt symbol in command vi mode.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='❮'
   # Prompt symbol in visual vi mode.
@@ -211,23 +213,25 @@
   #   typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=103
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=39
   #
-  #   # Styling for WORK_NOT_WRITABLE.
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND=31
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_SHORTENED_FOREGROUND=103
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_ANCHOR_FOREGROUND=39
-  #
-  #   # Styling for WORK_NON_EXISTENT.
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_FOREGROUND=31
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_SHORTENED_FOREGROUND=103
-  #   typeset -g POWERLEVEL9K_DIR_WORK_NON_EXISTENT_ANCHOR_FOREGROUND=39
-  #
   # If a styling parameter isn't explicitly defined for some class, it falls back to the classless
   # parameter. For example, if POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND is not set, it falls
   # back to POWERLEVEL9K_DIR_FOREGROUND.
-  #
-  typeset -g POWERLEVEL9K_DIR_CLASSES=()
+
+  typeset -g POWERLEVEL9K_DIR_CLASSES=(
+      '~/projects/kraken-core/src/octoenergy/interfaces/supportsite/static-src(|/*)'  STATIC_SRC     ''
+      '~/projects/kraken-core(|/*)'  KRAKEN_CORE     ''
+  )
+  # Styling for KRAKEN_CORE.
+  # typeset -g POWERLEVEL9K_DIR_KRAKEN_CORE_VISUAL_IDENTIFIER_EXPANSION=''
+  typeset -g POWERLEVEL9K_DIR_KRAKEN_CORE_FOREGROUND=093
+  typeset -g POWERLEVEL9K_DIR_KRAKEN_CORE_SHORTENED_FOREGROUND=093
+  typeset -g POWERLEVEL9K_DIR_KRAKEN_CORE_ANCHOR_FOREGROUND=093
+
+  # Styling for STATIC_SRC.
+  # typeset -g POWERLEVEL9K_DIR_STATIC_SRC_VISUAL_IDENTIFIER_EXPANSION='󰜈'
+  typeset -g POWERLEVEL9K_DIR_STATIC_SRC_FOREGROUND=027
+  typeset -g POWERLEVEL9K_DIR_STATIC_SRC_SHORTENED_FOREGROUND=027
+  typeset -g POWERLEVEL9K_DIR_STATIC_SRC_ANCHOR_FOREGROUND=027
 
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='%fin '
@@ -261,10 +265,10 @@
     if (( $1 )); then
       # Styling for up-to-date Git status.
       local       meta='%f'     # default foreground
-      local      clean='%76F'   # green foreground
-      local   modified='%178F'  # yellow foreground
-      local  untracked='%39F'   # blue foreground
-      local conflicted='%196F'  # red foreground
+      local      clean='%202F'  # orange foreground
+      local   modified='%202F'  # orange foreground
+      local  untracked='%202F'  # orange foreground
+      local conflicted='%202F'  # orange foreground
     else
       # Styling for incomplete and stale Git status.
       local       meta='%244F'  # grey foreground
@@ -284,19 +288,6 @@
       (( $#branch > 50 )) && branch[13,-13]="…"  # <-- this line
       res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     fi
-
-    # if [[ -n $VCS_STATUS_TAG
-    #       # Show tag only if not on a branch.
-    #       # Tip: To always show tag, delete the next line.
-    #       && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
-    #     ]]; then
-    #   local tag=${(V)VCS_STATUS_TAG}
-    #   # If tag name is at most 32 characters long, show it in full.
-    #   # Otherwise show the first 12 … the last 12.
-    #   # Tip: To always show tag name in full without truncation, delete the next line.
-    #   (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
-    #   res+="${meta}#${clean}${tag//\%/%%}"
-    # fi
 
     # Display the current Git commit if there is no branch and no tag.
     # Tip: To always display the current Git commit, delete the next line.
@@ -426,32 +417,32 @@
   # it will signify error by turning red.
   typeset -g POWERLEVEL9K_STATUS_ERROR=false
   typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND=160
-  typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION='✘'
+  typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION=''
 
   # Status when the last command was terminated by a signal.
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_FOREGROUND=160
   # Use terse signal names: "INT" instead of "SIGINT(2)".
   typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=false
-  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION='✘'
+  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION=''
 
   # Status when some part of a pipe command fails and the overall exit status is also non-zero.
   # It may look like this: 1|0.
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_FOREGROUND=160
-  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION='✘'
+  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION=''
 
   ###################[ command_execution_time: duration of the last command ]###################
   # Show duration of the last command if takes at least this many seconds.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=2
   # Show this many fractional digits. Zero means round to seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
   # Execution time color.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=101
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=250
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=''
   # Custom prefix.
   # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='%ftook '
 
@@ -469,47 +460,14 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
-  #####################[ anaconda: conda environment (https://conda.io/) ]######################
-  # Anaconda environment color.
-  typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=37
-
-  # Anaconda segment format. The following parameters are available within the expansion.
-  #
-  # - CONDA_PREFIX                 Absolute path to the active Anaconda/Miniconda environment.
-  # - CONDA_DEFAULT_ENV            Name of the active Anaconda/Miniconda environment.
-  # - CONDA_PROMPT_MODIFIER        Configurable prompt modifier (see below).
-  # - P9K_ANACONDA_PYTHON_VERSION  Current python version (python --version).
-  #
-  # CONDA_PROMPT_MODIFIER can be configured with the following command:
-  #
-  #   conda config --set env_prompt '({default_env}) '
-  #
-  # The last argument is a Python format string that can use the following variables:
-  #
-  # - prefix       The same as CONDA_PREFIX.
-  # - default_env  The same as CONDA_DEFAULT_ENV.
-  # - name         The last segment of CONDA_PREFIX.
-  # - stacked_env  Comma-separated list of names in the environment stack. The first element is
-  #                always the same as default_env.
-  #
-  # Note: '({default_env}) ' is the default value of env_prompt.
-  #
-  # The default value of POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION expands to $CONDA_PROMPT_MODIFIER
-  # without the surrounding parentheses, or to the last path component of CONDA_PREFIX if the former
-  # is empty.
-  typeset -g POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION='${${${${CONDA_PROMPT_MODIFIER#\(}% }%\)}:-${CONDA_PREFIX:t}}'
-
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_ANACONDA_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################
   # Pyenv color.
-  typeset -g POWERLEVEL9K_PYENV_FOREGROUND=37
+  typeset -g POWERLEVEL9K_PYENV_FOREGROUND=027
   # Hide python version if it doesn't come from one of these sources.
   typeset -g POWERLEVEL9K_PYENV_SOURCES=(shell local global)
   # If set to false, hide python version if it's the same as global:
   # $(pyenv version-name) == $(pyenv global).
-  typeset -g POWERLEVEL9K_PYENV_PROMPT_ALWAYS_SHOW=false
+  typeset -g POWERLEVEL9K_PYENV_PROMPT_ALWAYS_SHOW=true
   # If set to false, hide python version if it's equal to "system".
   typeset -g POWERLEVEL9K_PYENV_SHOW_SYSTEM=true
 
@@ -526,7 +484,7 @@
   typeset -g POWERLEVEL9K_PYENV_CONTENT_EXPANSION='${P9K_CONTENT}${${P9K_CONTENT:#$P9K_PYENV_PYTHON_VERSION(|/*)}:+ $P9K_PYENV_PYTHON_VERSION}'
 
   # Custom icon.
-  # typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION=''
 
   ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
   # Nvm color.

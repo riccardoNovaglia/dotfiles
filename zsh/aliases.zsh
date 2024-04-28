@@ -24,7 +24,7 @@ alias ,envless="env | less"
 alias play_alert_sound='afplay /System/Library/Sounds/Hero.aiff'
 alias ,a='play_alert_sound'
 
-alias pk10reload='source ~/.p10k.zsh'
+alias ,p10k='source_p10k'
 source ~/projects/me/dotfiles/zsh/octo.aliases.zsh
 
 yaddcommitamend() {
