@@ -1,0 +1,68 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+command_timeout = 1000
+
+format = """
+$directory\
+$fill\
+$git_branch\
+$git_state\
+$git_status\
+$fill\
+$cmd_duration\
+$nodejs\
+$python\
+$line_break\
+$character\
+"""
+
+[directory]
+style = "bold underline fg:blue"
+format = "[ $path]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Downloads" = " "
+"projects" = "󰲋 "
+"kraken-core" = " "
+"tako" = ""
+
+[git_branch]
+symbol = ""
+style = "fg:#f44d27"
+format = '[$symbol $branch ]($style)'
+
+[git_status]
+style = "fg:#f44d27"
+format = '[$ahead_behind]($style)'
+diverged = '⇡${ahead_count}⇣${behind_count}'
+
+[fill]
+symbol = " "
+
+[cmd_duration]
+show_milliseconds = true
+
+[nodejs]
+symbol = ""
+version_format = 'v$major'
+detect_extensions = [ "js", "mjs", "cjs", "ts", "mts", "cts", 'py' ]
+style = "fg:green"
+format = '[ $symbol( $version)]($style)'
+
+[python]
+symbol = ""
+version_format = 'v$major.$minor'
+pyenv_version_name = true
+detect_folders = ['kraken-core']
+style = "fg:blue"
+format = '[ $symbol( $version)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[](bold fg:green)'
+error_symbol = '[](bold fg:red)'
