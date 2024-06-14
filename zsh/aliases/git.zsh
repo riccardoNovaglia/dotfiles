@@ -85,3 +85,5 @@ alias gg='gf'
 alias gd='fzf-git-delete-branches'
 
 alias grb='fzf-git-rebase'
+
+alias g1='git checkout HEAD~1'
