@@ -26,8 +26,7 @@ source ~/projects/me/dotfiles/zsh/tools.zsh
 source ~/projects/me/dotfiles/zsh/invoke.zsh
 
 # Enable aliases.
-source ~/projects/me/dotfiles/zsh/aliases.zsh
-source ~/projects/me/dotfiles/zsh/git_aliases.zsh
+source ~/projects/me/dotfiles/zsh/aliases/aliases.zsh
 
 # Imported from p10k.zsh.
 source_p10k

@@ -1,10 +1,12 @@
-alias gprune='git prune; git remote prune origin; git branch --merged master | grep -v "^[ *]*master$" | xargs git branch -d'
-alias gprune_main='git prune; git remote prune origin; git branch --merged main | grep -v "^[ *]*main$" | xargs git branch -d'
+alias repo_default_branch='git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@";'
+
+alias gprune='git prune; git remote prune origin; git branch --merged $(repo_default_branch) | grep -v "^[ *]*$(repo_default_branch)$" | xargs git branch -d'
+alias gprune_main='git prune; git remote prune origin; git branch --merged $(repo_default_branch) | grep -v "^[ *]*main$" | xargs git branch -d'
 alias gprune_orphans="git branch -vv | grep ': gone]'|  grep -v '\*' | awk '{ print $1; }' | xargs -r git branch -D"
 
 alias gupstash='git stash; gup; git stash pop'
-alias gmup='git checkout master; git fetch; gup;'
-alias reb='gmup; git checkout -; git rebase master;'
+alias gmup='git checkout $(repo_default_branch); git fetch; gup;'
+alias reb='gmup; git checkout -; git rebase $(repo_default_branch);'
 
 alias gbranch='gmup; gcb $1'
 alias gpr="git push >&1 | grep /pull/new | awk '{print $2}' |xargs open -u"

@@ -25,8 +25,10 @@ alias play_alert_sound='afplay /System/Library/Sounds/Hero.aiff'
 alias ,a='play_alert_sound'
 
 alias ,p10k='source_p10k'
-source ~/projects/me/dotfiles/zsh/octo.aliases.zsh
 
 yaddcommitamend() {
     yarn add $1 $2; git add . && git commit --amend --no-edit; git push -f
 }
+
+alias amexsort="python main.py"
+alias karabiner="npm run deploy"

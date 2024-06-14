@@ -1,8 +1,7 @@
-other.karabiner.edn
-.clj-kondo
-.lsp
-plugins
-octo.aliases.zsh
-Brewfile.lock.json
-.zshrc_link
 .DS_Store
+
+Brewfile.lock.json
+
+plugins
+
+zsh/aliases/octo.zsh
