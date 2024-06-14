@@ -27,34 +27,22 @@
 
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    # os_icon               # os identifier
-    # newline                 # \n
-    # dir                     # current directory
-    # vcs                     # git status
-    newline                 # \n
-    prompt_char             # prompt symbol
-    # =========================[ Line #2 ]=========================
-    # time                    # current time
-  )
-
-  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    # =========================[ Line #1 ]=========================
     status                  # exit code of the last command
     vcs                     # git status
     background_jobs         # presence of background jobs
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
     fnm                     # custom FNM prompt below at prompt_fnm
     command_execution_time  # duration of the last command
-    # direnv                  # direnv status (https://direnv.net/)
-    # virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    # anaconda                # conda environment (https://conda.io/)
-    # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    # node_version          # node.js version
-    # rust_version          # rustc version (https://www.rust-lang.org)
-    # example               # example user-defined segment (see prompt_example function below)
     newline                 # \n
     # =========================[ Line #2 ]=========================
+    prompt_char             # prompt symbol
+  )
+
+  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+    # =========================[ Line #1 ]=========================
     dir                     # current directory
+    newline                 # \n
+    # =========================[ Line #2 ]=========================
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
