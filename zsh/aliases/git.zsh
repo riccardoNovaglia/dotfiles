@@ -87,3 +87,18 @@ alias gd='fzf-git-delete-branches'
 alias grb='fzf-git-rebase'
 
 alias g1='git checkout HEAD~1'
+
+push_and_open_pr() {
+    git push;
+
+    sleep 1;
+
+    REPO_NAME=$(git remote get-url --push origin | sed s/git@github.com:// | sed s/.git//);
+    REPO_URL="http://github.com/$REPO_NAME";
+
+    CURRENT_BRANCH=$(git branch --show-current);
+    URL="$REPO_URL/pull/new/$CURRENT_BRANCH";
+
+    open -u $URL;
+}
+alias ppr='push_and_open_pr'
