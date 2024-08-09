@@ -17,6 +17,10 @@ source ~/projects/me/dotfiles/zsh/plugins.zsh
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 DISABLE_AUTO_UPDATE=true
 
+# Initialise zsh completions.
+eval "$(brew shellenv)"
+fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
+
 source $ZSH/oh-my-zsh.sh
 
 # Import and enable dev tools.
