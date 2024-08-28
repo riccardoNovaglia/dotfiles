@@ -29,10 +29,7 @@
     # =========================[ Line #1 ]=========================
     status                  # exit code of the last command
     vcs                     # git status
-    background_jobs         # presence of background jobs
-    pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    fnm                     # custom FNM prompt below at prompt_fnm
-    command_execution_time  # duration of the last command
+    dir                     # current directory
     newline                 # \n
     # =========================[ Line #2 ]=========================
     prompt_char             # prompt symbol
@@ -40,7 +37,10 @@
 
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    dir                     # current directory
+    command_execution_time  # duration of the last command
+    background_jobs         # presence of background jobs
+    pyenv                   # python environment (https://github.com/pyenv/pyenv)
+    fnm                     # custom FNM prompt below at prompt_fnm
     newline                 # \n
     # =========================[ Line #2 ]=========================
   )
