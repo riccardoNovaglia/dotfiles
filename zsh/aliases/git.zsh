@@ -103,8 +103,12 @@ push_and_open_pr() {
 }
 alias ppr='push_and_open_pr'
 
-tinyfix() {
+function tinyfix() {
     gmup; git checkout -b $1; git add .; git commit -m $2; ppr;
 }
 
 alias tinyfix='tinyfix'
+
+alias ,make_patch="git diff | cat | pbcopy;"
+alias ,reverse_patch="pbpaste | git apply;"
+alias ,apply_patch="pbpaste | git apply --reverse;"
