@@ -10,4 +10,6 @@
 
 open -a "Google Chrome"
 open -a "Slack"
-/Users/riccardo.novaglia/.idea/cmd/pycharm1 ~/projects/kraken-core
+/Users/riccardo.novaglia/.idea/cmd/pycharm1 ~/projects/water-consumer-site
+
+./open-okta.sh
