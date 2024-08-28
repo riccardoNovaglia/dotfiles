@@ -13,7 +13,8 @@ alias charm="pycharm1"
 
 alias zshrc="vi ~/.zshrc && source ~/.zshrc"
 # alias z="zshrc"
-alias zup="source ~/.zshrc"
+# alias zup="source ~/.zshrc"
+alias zupalias="source ~/projects/me/dotfiles/zsh/aliases/aliases.zsh"
 
 alias ,aliases="less ~/projects/me/dotfiles/zsh/aliases.zsh"
 alias ,aliases_up="vi ~/projects/me/dotfiles/zsh/aliases.zsh"
