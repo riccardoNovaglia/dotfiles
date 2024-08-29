@@ -5,3 +5,4 @@ Brewfile.lock.json
 plugins
 
 zsh/aliases/kraken.zsh
+zsh/aliases/kfu.zsh
