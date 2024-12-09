@@ -61,6 +61,8 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# uv, probably?
+. "$HOME/.cargo/env"
 
 ################
 # Disabled tools

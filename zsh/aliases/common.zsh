@@ -1,5 +1,5 @@
 wait_and_open() {
-    wait-port --output silent $1; 
+    wait-port --output silent $1;
     osascript ~/projects/me/dotfiles/open_or_refresh.applescript "http://localhost:$1";
 }
 
@@ -33,3 +33,5 @@ yaddcommitamend() {
 
 alias amexsort="python main.py"
 alias karabiner="npm run deploy"
+
+alias ,aliasearch="cat ~/projects/me/dotfiles/zsh/aliases/* | grep \"alias \" | fzf"
