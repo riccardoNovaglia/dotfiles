@@ -2,12 +2,12 @@ on findMatchingTabs(targetAddress)
     set matchingTabs to {}
     set blankTab to missing value
     
-    tell application "Google Chrome"
+    tell application "Vivaldi"
         repeat with w in windows
             repeat with t in tabs of w
                 if URL of t contains targetAddress then
                     set end of matchingTabs to t
-                else if URL of t contains "chrome://newtab/" then
+                else if URL of t contains "vivaldi://newtab/" then
                     set blankTab to t
                 end if
             end repeat
@@ -25,7 +25,7 @@ on run argv
 
     set {matchingTabs, blankTab} to findMatchingTabs(targetAddress)
 
-    tell application "Google Chrome"
+    tell application "Vivaldi"
         if count of matchingTabs > 0 then
             repeat with m in matchingTabs
                 tell m to reload
