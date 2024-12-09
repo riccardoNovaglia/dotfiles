@@ -39,7 +39,7 @@
     # =========================[ Line #1 ]=========================
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
-    pyenv                   # python environment (https://github.com/pyenv/pyenv)
+    virtualenv              # python environment (https://github.com/pyenv/pyenv)
     fnm                     # custom FNM prompt below at prompt_fnm
     newline                 # \n
     # =========================[ Line #2 ]=========================
@@ -447,6 +447,9 @@
   typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=178
   # Custom icon.
   # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ################[ virtualenv ]################
+  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=027
 
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################
   # Pyenv color.
