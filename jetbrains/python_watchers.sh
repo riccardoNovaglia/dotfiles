@@ -7,3 +7,4 @@ PYTHON_VENV_DIR=$2
 
 "$PYTHON_VENV_DIR/ruff" format $FILE_PATH > /dev/null
 "$PYTHON_VENV_DIR/ruff" check $FILE_PATH --fix
+"$PYTHON_VENV_DIR/ruff" check $FILE_PATH --select I --fix
