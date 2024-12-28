@@ -11,6 +11,7 @@ alias reb='gmup; git checkout -; git rebase $(repo_default_branch);'
 
 alias gbranch='gmup; gcb $1'
 alias gpr="git push >&1 | grep /pull/new | awk '{print $2}' |xargs open -u"
+alias gup="git pull --rebase"
 
 alias gcommitshutup='ga .; GIT_EDITOR=true git commit --no-verify --no-edit'
 alias gamendshutup='gcommitshutup --amend'
