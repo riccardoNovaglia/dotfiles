@@ -1,6 +1,15 @@
 # Profiling: uncomment next line to turn on to debug slow commands, plus matching at end of file.
 # zmodload zsh/zprof
 
+# To profile loading of plugins, replace plugin loading with this snippet in the file below.
+## Load all of the plugins that were defined in ~/.zshrc
+#for plugin ($plugins); do
+##  timer=$(python3 -c 'import time; print(int(time.time() * 1000))')
+#  _omz_source "plugins/$plugin/$plugin.plugin.zsh"
+##  now=$(python3 -c 'import time; print(int(time.time() * 1000))')
+##  elapsed=$(($now-$timer))
+##  echo $elapsed":" $plugin
+#done
 export ZSH="$HOME/.oh-my-zsh"
 
 source ~/projects/me/dotfiles/zsh/p10k.zsh
