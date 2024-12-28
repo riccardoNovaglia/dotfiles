@@ -49,3 +49,5 @@ source ~/projects/me/dotfiles/zsh/kraken.zsh
 
 # Profiling: uncomment (and matching at top of file) to turn on to debug slow commands.
 # zprof
+
+source ~/projects/me/dotfiles/zsh/on_startup.zsh
