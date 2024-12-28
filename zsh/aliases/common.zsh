@@ -35,3 +35,5 @@ alias amexsort="python main.py"
 alias karabiner="npm run deploy"
 
 alias ,aliasearch="cat ~/projects/me/dotfiles/zsh/aliases/* | grep \"alias \" | fzf"
+
+alias ,ghostty_docs="ghostty +show-config --default --docs > /tmp/ghostty.docs | fleet /tmp/ghostty.docs"
