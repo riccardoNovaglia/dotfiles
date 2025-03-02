@@ -69,14 +69,16 @@ export PATH="/Users/riccardo.novaglia/.local/bin:$PATH"
 # source /Users/riccardo.novaglia/.config/op/plugins.sh
 
 # REPLACED WITH FNM
+# To re-enable, comment out fnm at the top, un-comment this, and remove the fnm terminal fragment from p10k.zsh:43
 # git clone https://github.com/lukechilds/zsh-nvm $ZSH_CUSTOM/plugins/zsh-nvm
-# export NVM_AUTO_USE=true
-# export NVM_LAZY_LOAD_EXTRA_COMMANDS=('yarn')
-# export NVM_LAZY_LOAD=true
-# export NVM_COMPLETION=true
-# plugins+=(zsh-nvm)
-# This is required for nvm and node to work in bash, but we don't run it an use aliases instead.
-# export NVM_DIR="$HOME/.nvm"
-# ([ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh") &  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-############
+#export NVM_AUTO_USE=true
+#export NVM_LAZY_LOAD_EXTRA_COMMANDS=('yarn')
+#export NVM_LAZY_LOAD=true
+#export NVM_COMPLETION=true
+#plugins+=(zsh-nvm)
+## This is required for nvm and node to work in bash, but we don't run it an use aliases instead.
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#plugins+=(zsh-nvm)
+###########
