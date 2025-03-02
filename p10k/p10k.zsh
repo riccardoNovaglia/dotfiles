@@ -434,19 +434,19 @@
   # Custom prefix.
   # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='%ftook '
 
-  #######################[ background_jobs: presence of background jobs ]#######################
-  # Don't show the number of background jobs.
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
-  # Background jobs color.
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=70
-  # Custom icon.
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='≡'
-
-  #######################[ direnv: direnv status (https://direnv.net/) ]########################
-  # Direnv color.
-  typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=178
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+#  #######################[ background_jobs: presence of background jobs ]#######################
+#  # Don't show the number of background jobs.
+#  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
+#  # Background jobs color.
+#  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=70
+#  # Custom icon.
+#  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='≡'
+#
+#  #######################[ direnv: direnv status (https://direnv.net/) ]########################
+#  # Direnv color.
+#  typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=178
+#  # Custom icon.
+#  # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ################[ virtualenv ]################
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=027
@@ -477,37 +477,37 @@
   # Custom icon.
   typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION=''
 
-  ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
-  # Nvm color.
-  typeset -g POWERLEVEL9K_NVM_FOREGROUND=70
-  # If set to false, hide node version if it's the same as default:
-  # $(nvm version current) == $(nvm version default).
-  typeset -g POWERLEVEL9K_NVM_PROMPT_ALWAYS_SHOW=false
-  # If set to false, hide node version if it's equal to "system".
-  typeset -g POWERLEVEL9K_NVM_SHOW_SYSTEM=true
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  ##############################[ node_version: node.js version ]###############################
-  # Node version color.
-  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=70
-  # Show node version only when in a directory tree containing package.json.
-  typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
-  # Rust version color.
-  typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=37
-  # Show rust version only when in a rust project subdirectory.
-  typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  #[ aws: aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) ]#
-  # Show aws only when the command you are typing invokes one of these tools.
-  # Tip: Remove the next line to always show aws.
-  typeset -g POWERLEVEL9K_AWS_SHOW_ON_COMMAND='aws|awless|terraform|pulumi|terragrunt'
+#  ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
+#  # Nvm color.
+#  typeset -g POWERLEVEL9K_NVM_FOREGROUND=70
+#  # If set to false, hide node version if it's the same as default:
+#  # $(nvm version current) == $(nvm version default).
+#  typeset -g POWERLEVEL9K_NVM_PROMPT_ALWAYS_SHOW=false
+#  # If set to false, hide node version if it's equal to "system".
+#  typeset -g POWERLEVEL9K_NVM_SHOW_SYSTEM=true
+#  # Custom icon.
+#  # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+#
+#  ##############################[ node_version: node.js version ]###############################
+#  # Node version color.
+#  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=70
+#  # Show node version only when in a directory tree containing package.json.
+#  typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
+#  # Custom icon.
+#  # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+#
+#  #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
+#  # Rust version color.
+#  typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=37
+#  # Show rust version only when in a rust project subdirectory.
+#  typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
+#  # Custom icon.
+#  # typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+#
+#  #[ aws: aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) ]#
+#  # Show aws only when the command you are typing invokes one of these tools.
+#  # Tip: Remove the next line to always show aws.
+#  typeset -g POWERLEVEL9K_AWS_SHOW_ON_COMMAND='aws|awless|terraform|pulumi|terragrunt'
 
   # POWERLEVEL9K_AWS_CLASSES is an array with even number of elements. The first element
   # in each pair defines a pattern against which the current AWS profile gets matched.
@@ -604,7 +604,7 @@
   #   - verbose: Enable instant prompt and print a warning when detecting console output during
   #              zsh initialization. Choose this if you've never tried instant prompt, haven't
   #              seen the warning, or if you are unsure what this all means.
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+  typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 
 
@@ -612,7 +612,7 @@
   # For example, you can type POWERLEVEL9K_BACKGROUND=red and see your prompt turn red. Hot reload
   # can slow down prompt by 1-2 milliseconds, so it's better to keep it turned off unless you
   # really need it.
-  typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=false
+  typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
 
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
