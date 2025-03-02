@@ -9,15 +9,11 @@ alias t="yarn test"
 alias i="yarn install"
 alias ,nu="nvm use"
 
-alias charm="pycharm1"
+alias charm="pycharm"
 
 alias zshrc="vi ~/.zshrc && source ~/.zshrc"
 # alias z="zshrc"
 # alias zup="source ~/.zshrc"
-alias zupalias="source ~/projects/me/dotfiles/zsh/aliases/aliases.zsh"
-
-alias ,aliases="less ~/projects/me/dotfiles/zsh/aliases.zsh"
-alias ,aliases_up="vi ~/projects/me/dotfiles/zsh/aliases.zsh"
 
 alias ,historyless="history | less"
 alias ,envless="env | less"
@@ -34,6 +30,5 @@ yaddcommitamend() {
 alias amexsort="python main.py"
 alias karabiner="npm run deploy"
 
-alias ,aliasearch="cat ~/projects/me/dotfiles/zsh/aliases/* | grep \"alias \" | fzf"
 
 alias ,ghostty_docs="ghostty +show-config --default --docs > /tmp/ghostty.docs | fleet /tmp/ghostty.docs"
