@@ -9,6 +9,6 @@
 # @raycast.icon 🤖
 
 open -a "Slack"
-open -b 'com.jetbrains.pycharm'
+/Users/riccardo.novaglia/.idea/cmd/pycharm ~/projects/kraken-core/
 
 ./open-okta.sh
