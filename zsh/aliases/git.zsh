@@ -20,7 +20,7 @@ alias gyolo='ga .; gamendshutup; git push -f'
 
 alias recent='git recent;' # git config --global alias.recent 'branch --sort=-committerdate --format="%(committerdate:relative)%09%(refname:short)"'
 alias recent-nodate='git recent-nodate;' # git config --global alias.recent-nodate 'branch --sort=-committerdate --format="%(refname:short)"'
-alias wip='recent;'
+alias wip='git commit -am "WIP" --no-verify;'
 alias gp='git push --force-with-lease'
 
 alias gpullforce='git fetch; git reset --hard origin/$(git branch --show-current)'
@@ -117,3 +117,5 @@ alias ,apply_patch="pbpaste | git apply --reverse;"
 
 alias ,tmp_skip_hooks="mv .git/hooks/pre-commit .git/hooks/pre-commit.bak; mv .git/hooks/post-commit .git/hooks/post-commit.bak"
 alias ,reenable_hooks="mv .git/hooks/pre-commit.bak .git/hooks/pre-commit; mv .git/hooks/post-commit.bak .git/hooks/post-commit"
+
+alias lg='lazygit'
