@@ -50,6 +50,8 @@ esac
 
 # uv, probably?
 . "$HOME/.cargo/env"
+# uv tools
+export PATH="/Users/riccardo.novaglia/.local/bin:$PATH"
 
 ################
 # Disabled tools
