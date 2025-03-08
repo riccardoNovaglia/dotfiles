@@ -97,7 +97,7 @@
 # Cache settings:
 
 ## Enable caching of prompts (default: False)
-#cache-prompts: false
+cache-prompts: true
 
 ## Number of times to ping at 5min intervals to keep prompt cache warm (default: 0)
 #cache-keepalive-pings: false
@@ -118,10 +118,10 @@
 # History Files:
 
 ## Specify the chat input history file (default: .aider.input.history)
-#input-history-file: .aider.input.history
+input-history-file: .aider/.aider.input.history
 
 ## Specify the chat history file (default: .aider.chat.history.md)
-#chat-history-file: .aider.chat.history.md
+chat-history-file: .aider/.aider.chat.history.md
 
 ## Restore the previous chat history messages (default: False)
 #restore-chat-history: false
