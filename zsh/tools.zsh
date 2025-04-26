@@ -14,13 +14,12 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PIP_REQUIRE_VIRTUALENV=true
 
 # pyenv
-#export PYENV_ROOT="$HOME/.pyenv"
-#export PATH="$PYENV_ROOT/bin:$PATH"
-## export PATH="$PYENV_ROOT/shims:$PATH"
-## virtualenvwrapper
-#export WORKON_HOME=$HOME/.virtualenvs
-#eval "$(pyenv init -)"
-#pyenv virtualenvwrapper;
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Postgres
+export PATH="/Applications/Postgres.app/Contents/Versions/15/bin:$PATH"
 
 # Poetry.
 #export PATH="/Users/riccardo.novaglia/.local/bin:$PATH"
@@ -32,7 +31,7 @@ export PATH="$HOME/.idea/cmd:$PATH"
 # Fuzzy finder.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Zoxide - replace cd with jq-like functionality.
+# Zoxide - replace cd with autojump-like functionality.
 eval "$(zoxide init --cmd cd zsh)"
 
 # Atuin - sql shell history.
@@ -49,9 +48,14 @@ esac
 # pnpm end
 
 # uv, probably?
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
 # uv tools
 export PATH="/Users/riccardo.novaglia/.local/bin:$PATH"
+
+# Git
+# This makes repository status check for large repositories much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_AUTO_UPDATE=true
 
 ################
 # Disabled tools

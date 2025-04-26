@@ -1,0 +1,5 @@
+alias run="yarn run"
+alias r="run"
+alias t="yarn test"
+alias i="yarn install"
+alias ,nu="nvm use"

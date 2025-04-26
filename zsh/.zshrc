@@ -20,12 +20,6 @@ source ~/projects/me/dotfiles/zsh/p10k.zsh
 # Load zsh plugins.
 source ~/projects/me/dotfiles/zsh/plugins.zsh
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-DISABLE_AUTO_UPDATE=true
-
 # Initialise zsh completions.
 eval "$(brew shellenv)"
 fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
