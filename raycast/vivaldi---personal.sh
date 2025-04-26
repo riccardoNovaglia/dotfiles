@@ -8,5 +8,5 @@
 # Optional parameters:
 # @raycast.icon 🎻
 
-open -n -a "Vivaldi" --args --profile-directory="Default"
+open -n -a "Vivaldi" --args --profile-directory="Profile 2"
 
