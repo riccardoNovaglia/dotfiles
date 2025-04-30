@@ -1,5 +1,5 @@
 wait_and_open() {
-    wait-port --output silent $1;
+    npx --yes wait-port --output silent $1;
     osascript ~/projects/me/dotfiles/open_or_refresh.applescript "http://localhost:$1";
 }
 
