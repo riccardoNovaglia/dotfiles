@@ -12,3 +12,6 @@ alias play_alert_sound='afplay /System/Library/Sounds/Hero.aiff'
 alias ,a='play_alert_sound'
 
 alias ,ghostty_docs="ghostty +show-config --default --docs > /tmp/ghostty.docs | fleet /tmp/ghostty.docs"
+
+alias lowpower='sudo pmset -a lowpowermode 1'
+alias lowpower-off='sudo pmset -a lowpowermode 0'
